@@ -1,7 +1,7 @@
 # ============================================================
 #  One Click Decimate
 #  Author: Slategray / Randall Rosas
-#  Version: 2.0.0 | Release Date: 2026-02-09
+#  Version: 2.0.1 | Release Date: 2026-02-10
 # ============================================================
 
 
@@ -12,7 +12,7 @@ from mathutils import bvhtree
 bl_info = {
     "name": "One Click Decimate",
     "author": "Slategray",
-    "version": (2, 0, 0),
+    "version": (2, 0, 1),
     "blender": (5, 0, 1),
     "location": "View3D > Sidebar > Tool",
     "description": "One click decimation tool that intelligently preserves mesh data.",
@@ -21,7 +21,7 @@ bl_info = {
 
 
 def debug_print(msg):
-    print(f"[OneClickDecimate 2.0.0] {msg}")
+    print(f"[OneClickDecimate 2.0.1] {msg}")
 
 
 # ============================================================
