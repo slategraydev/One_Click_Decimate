@@ -134,16 +134,22 @@ class OBJECT_OT_one_click_decimate(bpy.types.Operator):
         ratio = context.scene.one_click_decimate_ratio
         orig_matrix = source_obj.matrix_world.copy()
 
-        # Duplicate the source object to perform decimation without affecting the original
+        # Store parenting info to restore it later
+        orig_parent = source_obj.parent
+        orig_parent_type = source_obj.parent_type
+        orig_parent_bone = source_obj.parent_bone
+        orig_matrix_parent_inverse = source_obj.matrix_parent_inverse.copy()
+
         bpy.ops.object.select_all(action="DESELECT")
         source_obj.select_set(True)
         bpy.ops.object.duplicate(linked=False)
         working_obj = context.active_object
-        working_obj.parent = None
+
+        debug_print("Baking parent transforms into duplicate...")
+        bpy.ops.object.parent_clear(type="CLEAR_KEEP_TRANSFORM")
         bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
 
         # Create perimeter lock to protect UV seams and boundaries
-        debug_print("Creating perimeter lock...")
         view_layer = bpy.context.view_layer
         view_layer.objects.active = working_obj
         bpy.ops.object.mode_set(mode="EDIT")
@@ -182,6 +188,13 @@ class OBJECT_OT_one_click_decimate(bpy.types.Operator):
         bpy.ops.object.modifier_apply(modifier=mod.name)
 
         transfer_mesh_data(source_obj, working_obj)
+
+        # Restore parenting
+        if orig_parent:
+            working_obj.parent = orig_parent
+            working_obj.parent_type = orig_parent_type
+            working_obj.parent_bone = orig_parent_bone
+            working_obj.matrix_parent_inverse = orig_matrix_parent_inverse
 
         working_obj.matrix_world = orig_matrix
         working_obj.name = source_obj.name + "_Decimated"
