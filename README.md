@@ -28,11 +28,12 @@ This version is a bit more aggressive in its decimation process and UV preservat
 ## How to Use
 
 1.  Select your mesh in the 3D View.
-2.  Open the Sidebar (press `N`) and go to the **Tool** tab.
-3.  Find the **One Click Decimate** panel.
-4.  The panel displays the selected object name and current triangle count.
-5.  **Adjust Ratio**: Use the slider to set your target. The display shows "target / total" triangles (e.g., "2500 / 5000" for 50%).
-6.  Click **Decimate** to process.
+2.  Open the Sidebar (press `N`).
+3.  Go to the **Tool** tab.
+4.  Find the **One Click Decimate** panel.
+5.  The panel displays the selected object name and current triangle count.
+6.  **Adjust Ratio**: Use the slider to set your target. The display shows "target / total" triangles (e.g., "2500 / 5000" for 50%).
+7.  Click **Decimate** to process.
 
 ## License
 
